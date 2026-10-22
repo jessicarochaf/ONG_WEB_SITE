@@ -1,0 +1,1046 @@
+/* Caminho da Esperança - estilo do site
+   cores tiradas do layout do figma */
+
+:root {
+    --azul: #55A3F0;
+    --azul-escuro: #0D3B66;
+    --amarelo: #F2C94C;
+    --fundo-claro: #EEF4FC;
+    --azul-icone: #DCEAFB;
+    --borda: #C9DAF0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* rola devagar quando clica em Sobre/Projetos */
+}
+
+body {
+    font-family: 'Poppins', Verdana, sans-serif;
+    color: #222;
+    background: white;
+    border-top: 6px solid var(--azul);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ---------- menu de cima ---------- */
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 40px;
+}
+
+.logo {
+    width: 110px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+.menu a {
+    color: var(--azul-escuro);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.menu a:hover {
+    color: var(--azul);
+}
+
+.botao-doar {
+    background: var(--amarelo);
+    padding: 8px 14px;
+    border-radius: 4px;
+}
+
+.menu .botao-doar:hover {
+    color: var(--azul-escuro);
+    filter: brightness(0.95);
+}
+
+/* ---------- titulos que se repetem ---------- */
+
+/* titulo com linha dos dois lados: ——— TEXTO ——— */
+.titulo-linha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    color: var(--azul-escuro);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.titulo-linha::before,
+.titulo-linha::after {
+    content: '';
+    width: 100px;
+    height: 2px;
+    background: var(--azul-escuro);
+}
+
+.subtitulo {
+    color: var(--azul);
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1;
+}
+
+.titulo-grande {
+    color: var(--azul-escuro);
+    font-size: 52px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 1.1;
+}
+
+/* ---------- pagina inicial ---------- */
+
+.titulo-principal {
+    max-width: 1000px;
+    margin: 60px auto 90px;
+    padding: 0 40px 0 190px;
+}
+
+.titulo-principal h1 {
+    color: var(--azul-escuro);
+    font-size: 54px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.cartoes {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 25px;
+}
+
+.cartao {
+    display: flex;
+    gap: 10px;
+    max-width: 240px;
+}
+
+.cartao-icone {
+    font-size: 40px;
+    line-height: 1;
+}
+
+.cartao h3 {
+    color: var(--azul-escuro);
+    font-size: 15px;
+}
+
+.cartao p {
+    color: var(--azul);
+    font-size: 14px;
+}
+
+.projetos {
+    margin-top: 90px;
+}
+
+.lista-projetos {
+    display: flex;
+    justify-content: center;
+    max-width: 1100px;
+    margin: 40px auto 0;
+    padding: 0 20px;
+}
+
+.projeto {
+    flex: 1;
+    padding: 0 18px;
+    border-left: 1px solid var(--azul-escuro);
+}
+
+.projeto:first-child {
+    border-left: none;
+}
+
+.projeto img {
+    width: 36px;
+}
+
+.projeto h3 {
+    color: var(--azul-escuro);
+    font-size: 12px;
+    margin: 6px 0;
+}
+
+.projeto p {
+    font-size: 11px;
+}
+
+.sobre {
+    margin-top: 90px;
+}
+
+.sobre-conteudo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 25px auto 0;
+    padding: 0 30px;
+}
+
+.sobre-texto h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.sobre-texto p {
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+.sobre-foto {
+    width: 380px;
+    border-radius: 10px;
+    margin-top: 40px;
+}
+
+/* ---------- pagina de doacao ---------- */
+
+.faixa-azul {
+    background: var(--azul);
+    text-align: center;
+    padding: 25px 0;
+}
+
+.faixa-azul h1 {
+    color: var(--azul-escuro);
+    font-size: 40px;
+    font-weight: 800;
+}
+
+.faixa-azul p {
+    color: white;
+    font-size: 13px;
+}
+
+.caixas-doacao {
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+    margin: 50px 0 40px;
+}
+
+.caixa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid var(--azul-escuro);
+    border-radius: 25px;
+    padding: 25px 40px;
+    width: 300px;
+}
+
+.imagem-pix {
+    width: 180px;
+}
+
+.imagem-pagbank {
+    width: 140px;
+    margin: 25px 0;
+}
+
+.codigo-qr {
+    width: 150px;
+    height: 150px;
+    object-fit: contain; /* nao deixa o qr code esticar */
+}
+
+.contato-titulo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--azul-escuro);
+    font-size: 26px;
+}
+
+.contato-titulo img {
+    width: 26px;
+}
+
+.imagem-usuario {
+    width: 48px;
+    margin-top: 15px;
+}
+
+.nome-contato {
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.legenda {
+    color: gray;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.frase-final {
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.frase-final::before,
+.frase-final::after {
+    width: 220px;
+    height: 1px;
+}
+
+/* ---------- pagina de voluntario ---------- */
+
+.fundo-voluntario {
+    background: var(--fundo-claro);
+    padding: 35px 60px 10px;
+}
+
+.faixa-voluntario {
+    display: flex;
+    align-items: center;
+    background: var(--azul);
+    border-radius: 14px;
+    padding: 20px 90px;
+}
+
+.coracao {
+    color: var(--amarelo);
+    font-size: 70px;
+    padding-right: 30px;
+    border-right: 2px solid white;
+    margin-right: 30px;
+    line-height: 1;
+}
+
+.faixa-textos h1 {
+    color: var(--azul-escuro);
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.faixa-textos p {
+    color: white;
+    font-size: 18px;
+}
+
+.formulario {
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+    margin-top: 25px;
+    padding: 30px 40px;
+}
+
+.campo {
+    display: grid;
+    grid-template-columns: 50px 220px 1fr;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.campo-topo {
+    align-items: start;
+}
+
+.icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--azul-icone);
+    color: var(--azul-escuro);
+    font-size: 18px;
+}
+
+.campo > label {
+    color: var(--azul-escuro);
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.campo-topo > label {
+    padding-top: 8px;
+}
+
+.campo input[type="text"],
+.campo input[type="tel"],
+.campo input[type="email"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.campo input:focus {
+    outline: none;
+    border-color: var(--azul);
+}
+
+.opcoes-linha {
+    display: flex;
+    gap: 30px;
+}
+
+.opcao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.opcao input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--azul);
+}
+
+.caixa-projetos {
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.horas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.horas input[type="number"] {
+    width: 90px;
+    padding: 8px 12px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.horas input[type="range"] {
+    accent-color: var(--azul);
+}
+
+.botao-enviar {
+    display: block;
+    margin: 25px auto 0;
+    width: 300px;
+    padding: 14px;
+    background: var(--azul);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.botao-enviar:hover {
+    background: var(--azul-escuro);
+}
+
+/* ---------- rodape ---------- */
+
+.rodape {
+    background: var(--azul);
+    color: white;
+    margin-top: 60px;
+}
+
+.rodape-linha {
+    display: flex;
+    align-items: flex-start;
+    gap: 60px;
+    padding: 20px 40px;
+    border-bottom: 1px solid white;
+}
+
+.logo-rodape {
+    width: 90px;
+}
+
+.frase-rodape {
+    font-weight: 700;
+    font-size: 14px;
+    max-width: 150px;
+}
+
+.rodape h4 {
+    font-size: 14px;
+}
+
+.rodape a,
+.rodape p {
+    display: block;
+    font-size: 13px;
+}
+
+.rodape a:hover {
+    text-decoration: underline;
+}
+
+.direitos {
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* ---------- paginas Sobre e Projetos ---------- */
+
+.pagina-secao {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 40px;
+}
+
+.pagina-secao p {
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.fundo-claro {
+    background: var(--fundo-claro);
+}
+
+.titulo-secao {
+    color: var(--azul-escuro);
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.duas-colunas {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.duas-colunas > div {
+    flex: 1;
+}
+
+.foto-arredondada {
+    width: 420px;
+    border-radius: 14px;
+}
+
+.lista-bolinha {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.lista-bolinha li {
+    margin-bottom: 6px;
+}
+
+.lista-bolinha li::marker {
+    color: var(--azul);
+}
+
+.versiculo {
+    font-style: italic;
+    color: var(--azul-escuro);
+    border-left: 4px solid var(--amarelo);
+    padding-left: 12px;
+}
+
+.versiculo span {
+    font-style: normal;
+    font-size: 13px;
+}
+
+/* numeros grandes da pesquisa */
+.numeros {
+    display: flex;
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.numero {
+    flex: 1;
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--borda);
+}
+
+.numero span {
+    display: block;
+    color: var(--azul);
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.numero p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.pesquisa {
+    align-items: flex-start;
+}
+
+.pesquisa h3 {
+    color: var(--azul-escuro);
+    margin-bottom: 12px;
+}
+
+/* barrinha horizontal: o texto do lado e a barra azul com a % */
+.barra {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.barra span {
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.barra div {
+    background: var(--azul);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    min-width: 40px;
+}
+
+.etiquetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.etiquetas span {
+    background: var(--azul-escuro);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.obs {
+    font-size: 14px;
+}
+
+/* equipe */
+.equipe {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.pessoa img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+.pessoa h3 {
+    color: var(--azul-escuro);
+    text-transform: uppercase;
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.pessoa p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* testemunho */
+.testemunho {
+    display: flex;
+    align-items: flex-start;
+    gap: 35px;
+    margin-top: 20px;
+}
+
+.foto-testemunho {
+    width: 220px;
+    border-radius: 14px;
+    flex-shrink: 0;
+}
+
+.testemunho blockquote {
+    background: white;
+    border-left: 5px solid var(--azul);
+    border-radius: 10px;
+    padding: 20px 25px;
+}
+
+.testemunho blockquote p {
+    font-size: 15px;
+}
+
+.testemunho cite {
+    color: var(--azul-escuro);
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* faixa azul escura no final com os botoes */
+.chamada {
+    background: var(--azul-escuro);
+    color: white;
+    text-align: center;
+    padding: 45px 20px;
+}
+
+.chamada h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.chamada-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.botao-amarelo,
+.botao-borda {
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.botao-amarelo {
+    background: var(--amarelo);
+    color: var(--azul-escuro);
+}
+
+.botao-borda {
+    border: 2px solid white;
+}
+
+.botao-amarelo:hover,
+.botao-borda:hover {
+    filter: brightness(1.1);
+}
+
+/* link "ver mais" da pagina inicial */
+.saiba-mais {
+    display: table;
+    margin: 30px auto 0;
+    color: var(--azul-escuro);
+    font-weight: 700;
+    border-bottom: 2px solid var(--amarelo);
+}
+
+.saiba-mais:hover {
+    color: var(--azul);
+}
+
+/* pagina de projetos */
+.introducao {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.atalhos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.atalhos a {
+    border: 1px solid var(--azul);
+    color: var(--azul-escuro);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.atalhos a:hover {
+    background: var(--azul);
+    color: white;
+}
+
+.projeto-detalhe {
+    display: flex;
+    align-items: flex-start;
+    gap: 45px;
+}
+
+/* um projeto com a foto na esquerda, o outro na direita */
+.invertido {
+    flex-direction: row-reverse;
+}
+
+.foto-projeto {
+    width: 340px;
+    height: 480px;
+    object-fit: cover;
+    border-radius: 14px;
+    flex-shrink: 0;
+}
+
+.projeto-titulo-pequeno {
+    color: var(--azul);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0 !important;
+}
+
+.projeto-info h2 {
+    color: var(--azul-escuro);
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 12px;
+}
+
+.projeto-info h3 {
+    color: var(--azul-escuro);
+    font-size: 16px;
+    margin: 18px 0 6px;
+}
+
+.etiquetas-projeto {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.etiquetas-projeto span {
+    background: var(--azul-icone);
+    color: var(--azul-escuro);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.duas-listas {
+    display: flex;
+    gap: 30px;
+}
+
+.duas-listas > div {
+    flex: 1;
+}
+
+.duas-listas li,
+.lista-numero li {
+    font-size: 14px;
+}
+
+.lista-numero {
+    padding-left: 20px;
+}
+
+.lista-numero li {
+    margin-bottom: 5px;
+}
+
+.destaque {
+    background: var(--amarelo);
+    color: var(--azul-escuro);
+    font-weight: 700;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.necessidades {
+    display: flex;
+    gap: 25px;
+}
+
+.necessidade {
+    flex: 1;
+    border: 1px solid var(--borda);
+    border-top: 5px solid var(--azul);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.necessidade h3 {
+    color: var(--azul-escuro);
+    margin-bottom: 8px;
+}
+/* ---------- telas menores (celular / janela estreita) ---------- */
+
+@media (max-width: 900px) {
+    .topo {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 16px;
+    }
+
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px 20px;
+    }
+
+    .titulo-principal {
+        padding: 0 16px;
+        margin: 30px auto 50px;
+        text-align: center;
+    }
+
+    .titulo-principal h1 {
+        font-size: 34px;
+    }
+
+    .titulo-linha::before,
+    .titulo-linha::after {
+        width: 30px;
+    }
+
+    .titulo-grande {
+        font-size: 34px;
+    }
+
+    .cartoes,
+    .lista-projetos,
+    .sobre-conteudo,
+    .caixas-doacao,
+    .rodape-linha {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .projeto {
+        border-left: none;
+        max-width: 400px;
+    }
+
+    .sobre-foto {
+        width: 100%;
+        max-width: 380px;
+        margin-top: 0;
+    }
+
+    .caixa {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .rodape-linha {
+        text-align: center;
+    }
+
+    .frase-rodape {
+        max-width: none;
+    }
+
+    .fundo-voluntario {
+        padding: 20px 16px 10px;
+    }
+
+    .faixa-voluntario {
+        padding: 20px;
+    }
+
+    .faixa-textos h1 {
+        font-size: 30px;
+    }
+
+    .formulario {
+        padding: 20px;
+    }
+
+    /* no celular o icone, o nome do campo e a caixa ficam um embaixo do outro */
+    .campo {
+        grid-template-columns: 50px 1fr;
+        gap: 8px 0;
+    }
+
+    .campo > input,
+    .campo > div:not(.icone) {
+        grid-column: 1 / -1;
+    }
+
+    .opcoes-linha {
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .botao-enviar {
+        width: 100%;
+    }
+}
+
+/* paginas Sobre e Projetos no celular */
+@media (max-width: 900px) {
+    .pagina-secao {
+        padding: 35px 16px;
+    }
+
+    .duas-colunas,
+    .numeros,
+    .testemunho,
+    .projeto-detalhe,
+    .invertido,
+    .duas-listas,
+    .necessidades {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .foto-arredondada,
+    .foto-projeto,
+    .foto-testemunho {
+        width: 100%;
+        max-width: 420px;
+        height: auto;
+        align-self: center;
+    }
+
+    .foto-projeto {
+        aspect-ratio: 4 / 3;
+    }
+
+    .equipe {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+
+    .titulo-secao,
+    .projeto-info h2 {
+        font-size: 26px;
+    }
+}

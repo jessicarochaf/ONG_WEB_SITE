@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caminho da Esperança - Instituto Social</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <link rel="icon" href="{% static 'imagens/logo.png' %}">
+</head>
+<body>
+
+    <!-- menu de cima (aparece em todas as paginas) -->
+    <header class="topo">
+        <a href="{% url 'inicio' %}">
+            <img src="{% static 'imagens/logo.png' %}" alt="Caminho da Esperança" class="logo">
+        </a>
+        <nav class="menu">
+            <a href="{% url 'inicio' %}">Início</a>
+            <a href="{% url 'sobre' %}">Sobre</a>
+            <a href="{% url 'projetos' %}">Projetos</a>
+            <a href="{% url 'voluntario' %}">Seja um Voluntário</a>
+            <a href="{% url 'doacao' %}" class="botao-doar">&#9825; Doe Agora</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block conteudo %}{% endblock %}
+    </main>
+
+    <!-- rodape -->
+    <footer class="rodape">
+        <div class="rodape-linha">
+            <img src="{% static 'imagens/logo_rodape.png' %}" alt="Caminho da Esperança" class="logo-rodape">
+
+            <p class="frase-rodape">Transformando vidas através da esperança, solidariedade e acolhimento.</p>
+
+            <div>
+                <h4>Navegação</h4>
+                <a href="{% url 'inicio' %}">Início</a>
+                <a href="{% url 'sobre' %}">Sobre</a>
+                <a href="{% url 'projetos' %}">Projetos</a>
+                <a href="{% url 'voluntario' %}">Seja um Voluntário</a>
+            </div>
+
+            <div>
+                <h4>Fale Conosco</h4>
+                <p>email: procaminhodaesperanca@gmail.com</p>
+                <p>(21) 99567-1064 | (61) 8467-1064</p>
+                <p>Instagram: institutocaminhodaesperanca</p>
+            </div>
+        </div>
+        <p class="direitos">@Direitos Reservados</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block conteudo %}
+
+<section class="faixa-azul">
+    <h1>NOSSOS PROJETOS</h1>
+    <p>O QUE SUA DOAÇÃO TORNA POSSÍVEL</p>
+</section>
+
+<section class="pagina-secao introducao">
+    <p>Nosso objetivo é oferecer desenvolvimento integral para crianças, adolescentes e jovens do Retiro São Joaquim. Mas queremos que você veja de forma prática o impacto que sua contribuição gera.</p>
+
+    <!-- atalhos pra cada projeto -->
+    <nav class="atalhos">
+        {% for projeto in projetos %}
+        <a href="#projeto-{{ forloop.counter }}">{{ projeto.nome }}</a>
+        {% endfor %}
+    </nav>
+</section>
+
+{% for projeto in projetos %}
+<!-- o "fundo-claro" fica alternando: um projeto sim, outro nao -->
+<section class="{% cycle '' 'fundo-claro' %}" id="projeto-{{ forloop.counter }}">
+    <div class="pagina-secao projeto-detalhe {% cycle '' 'invertido' %}">
+
+        <img src="{% static 'imagens/' %}{{ projeto.foto }}" alt="{{ projeto.nome }}" class="foto-projeto">
+
+        <div class="projeto-info">
+            <p class="projeto-titulo-pequeno">{{ projeto.titulo }}</p>
+            <h2>{{ projeto.nome }}</h2>
+
+            <div class="etiquetas-projeto">
+                <span><strong>Responsável:</strong> {{ projeto.responsavel }}</span>
+                <span><strong>Situação:</strong> {{ projeto.situacao }}</span>
+            </div>
+
+            <h3>Histórico</h3>
+            <p>{{ projeto.historico }}</p>
+
+            <div class="duas-listas">
+                <div>
+                    <h3>Infraestrutura</h3>
+                    <ul class="lista-bolinha">
+                        {% for item in projeto.infraestrutura %}<li>{{ item }}</li>{% endfor %}
+                    </ul>
+                </div>
+                <div>
+                    <h3>Materiais</h3>
+                    <ul class="lista-bolinha">
+                        {% for item in projeto.materiais %}<li>{{ item }}</li>{% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Objetivos</h3>
+            <ol class="lista-numero">
+                {% for item in projeto.objetivos %}<li>{{ item }}</li>{% endfor %}
+            </ol>
+
+            {% if projeto.destaque %}
+            <p class="destaque">&#9829; {{ projeto.destaque }}</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endfor %}
+
+<!-- melhorias que o projeto precisa -->
+<section class="pagina-secao">
+    <h2 class="titulo-secao">O que ainda precisamos</h2>
+    <div class="necessidades">
+        <div class="necessidade">
+            <h3>Cobertura do telhado</h3>
+            <p>O telhado protege nossos computadores e garante aulas de artes marciais mesmo em dias de chuva.</p>
+        </div>
+        <div class="necessidade">
+            <h3>Ampliação da área da cantina</h3>
+            <p>A ampliação da cantina cria espaço e melhora o atendimento das famílias do Sopão.</p>
+        </div>
+    </div>
+</section>
+
+<section class="chamada">
+    <h2>Impacto não é o que fazemos. Impacto é o que VOCÊ possibilita.</h2>
+    <div class="chamada-botoes">
+        <a href="{% url 'doacao' %}" class="botao-amarelo">&#9825; Doe Agora</a>
+        <a href="{% url 'voluntario' %}" class="botao-borda">Seja um Voluntário</a>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class="fundo-voluntario">
+
+    <section class="faixa-voluntario">
+        <span class="coracao">&#9829;</span>
+        <div class="faixa-textos">
+            <h1>Seja Voluntário</h1>
+            <p>Juntos, podemos fazer a diferença!</p>
+        </div>
+    </section>
+
+    <!-- formulario (por enquanto so o visual, ainda nao salva) -->
+    <form class="formulario" onsubmit="return false">
+
+        <div class="campo">
+            <span class="icone">&#9998;</span>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" placeholder="Digite seu nome completo">
+        </div>
+
+        <div class="campo">
+            <span class="icone">&#9742;</span>
+            <label for="telefone">Telefone:</label>
+            <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX">
+        </div>
+
+        <div class="campo">
+            <span class="icone">&#9993;</span>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" placeholder="seu@email.com">
+        </div>
+
+        <div class="campo">
+            <span class="icone">&#128197;</span>
+            <label>Disponibilidade:</label>
+            <div class="opcoes-linha">
+                <label class="opcao"><input type="radio" name="periodo" value="Manhã" checked> Manhã</label>
+                <label class="opcao"><input type="radio" name="periodo" value="Tarde"> Tarde</label>
+                <label class="opcao"><input type="radio" name="periodo" value="Noite"> Noite</label>
+            </div>
+        </div>
+
+        <div class="campo campo-topo">
+            <span class="icone">&#9678;</span>
+            <label>Projeto de interesse:</label>
+            <div class="caixa-projetos">
+                {% for projeto in projetos %}
+                <label class="opcao"><input type="checkbox" name="projetos" value="{{ projeto }}"> {{ projeto }}</label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="campo campo-topo">
+            <span class="icone">&#9719;</span>
+            <label for="horas">Horas por semana:</label>
+            <div class="horas">
+                <!-- os dois mexem juntos -->
+                <input type="number" id="horas" min="0" max="20" value="0"
+                       oninput="barra_horas.value = this.value">
+                <input type="range" id="barra_horas" min="0" max="20" value="0"
+                       oninput="horas.value = this.value">
+            </div>
+        </div>
+
+        <button type="submit" class="botao-enviar">&#10148; Enviar</button>
+    </form>
+
+</div>
+
+{% endblock %}

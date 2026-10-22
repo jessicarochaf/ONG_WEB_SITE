@@ -1,0 +1,108 @@
+from django.shortcuts import render
+
+# cada funcao mostra uma pagina do site (os html ficam na pasta templates)
+# os textos foram tirados do PDF do projeto (Projeto Social - PIBRSJ)
+
+def inicio(request):
+    return render(request, 'inicio.html')
+
+def sobre(request):
+    equipe = [
+        {'nome': 'Marcos', 'funcao': 'Responsável pelo Futebol', 'foto': 'equipe_marcos.jpg'},
+        {'nome': 'Claudinei', 'funcao': 'Responsável pelas Artes Marciais', 'foto': 'equipe_claudinei.jpg'},
+        {'nome': 'Rouglan', 'funcao': 'Responsável pelo curso de Elétrica', 'foto': 'equipe_rouglan.jpg'},
+        {'nome': 'João Pedro', 'funcao': 'Responsável pelo curso de Informática', 'foto': 'equipe_joao_pedro.jpg'},
+        {'nome': 'Arina', 'funcao': 'Responsável pelo Ballet na Igreja', 'foto': 'equipe_arina.jpg'},
+        {'nome': 'Rodrigão', 'funcao': 'Responsável pelo Sopão Solidário', 'foto': 'equipe_rodrigao.jpg'},
+        {'nome': 'Rômulo Fortunato', 'funcao': 'Responsável pelo Muay Thai', 'foto': 'equipe_romulo.jpg'},
+        {'nome': 'Wesley', 'funcao': 'Responsável pelo Taekwondo', 'foto': 'equipe_wesley.jpg'},
+        {'nome': 'Pamela', 'funcao': 'Responsável pela alfabetização e reforço escolar', 'foto': 'equipe_pamela.jpg'},
+    ]
+    return render(request, 'sobre.html', {'equipe': equipe})
+
+def projetos(request):
+    lista = [
+        {
+            'nome': 'Futebol',
+            'titulo': 'Saúde, Lazer e Valores',
+            'foto': 'projeto_futebol.jpg',
+            'responsavel': 'Marcos Gomes e Claudinei',
+            'situacao': 'Em andamento',
+            'historico': 'O futebol sempre foi uma ponte de transformação no bairro. Já gerou dezenas de histórias como a do Claudinei — vidas que encontraram disciplina, foco e novos caminhos. Hoje queremos retomar esse impacto — e isso depende de você.',
+            'infraestrutura': ['Local para realização das partidas (Campo São Jorge)', 'Sistema de som', 'Espaço para o público (pais, responsáveis, etc.)', 'Limpeza do campo'],
+            'materiais': ['Bola de futebol', 'Uniformes e tênis adequados para os participantes', 'Apitos e material de arbitragem', 'Cones e marcadores para campo'],
+            'objetivos': ['Oferecer 52 treinos ao ano.', 'Garantir café da manhã para 80 crianças todos os sábados.', 'Criar um canal entre esporte e oportunidades educacionais (informática/elétrica).', 'Ampliar o acesso de crianças vulneráveis a um ambiente seguro e acolhedor.'],
+            'destaque': 'Com R$50 você garante o lanche de todas as crianças por um sábado.',
+        },
+        {
+            'nome': 'Sopão Solidário',
+            'titulo': 'Alimentação que Cuida',
+            'foto': 'projeto_sopao.jpg',
+            'responsavel': 'José Carlos Rodrigues',
+            'situacao': 'Em andamento',
+            'historico': 'Começamos esse projeto no início de 2024. A princípio ele aconteceria com intervalo de duas semanas, por conta dos custos, mas no dia da inauguração percebemos a necessidade da comunidade. Na semana seguinte continuamos sem intervalos até hoje.',
+            'infraestrutura': ['Cozinha equipada', 'Mesas para servir a sopa', 'Espaço para acomodar as famílias', 'Iluminação', 'Climatização'],
+            'materiais': ['Ingredientes para o preparo do sopão (legumes, carne, arroz, etc.)', 'Panelas industriais', 'Talheres e pratos descartáveis', 'Embalagens para entrega de sopa'],
+            'objetivos': ['Distribuir 100 porções de sopa semanalmente, totalizando 5.200 refeições durante o ano.', 'Variar os cardápios semanalmente.', 'Fazer uma grande ceia de Natal.'],
+            'destaque': 'Gastamos em média R$85 a R$100 por semana, dependendo do cardápio.',
+        },
+        {
+            'nome': 'Curso de Informática',
+            'titulo': 'Formação Profissional',
+            'foto': 'projeto_informatica.jpg',
+            'responsavel': 'João Pedro',
+            'situacao': 'Precisa colocar telhado no terraço',
+            'historico': 'Três profissionais de TI da igreja decidiram mudar o futuro de jovens sem oportunidade. Conseguimos algumas máquinas — mas o espaço precisa de reforma urgente.',
+            'infraestrutura': ['Preparação do laboratório de informática', 'Instalação de rede de internet', 'Climatização do laboratório', 'Resolver problema de infiltração no terraço'],
+            'materiais': ['12 computadores', 'Bancadas, mesas e cadeiras de escritório', 'Software educacional e aplicativos para aulas', 'Projetor ou tela touch'],
+            'objetivos': ['Formar 36 alunos por ciclo.', 'Ensinar montagem, manutenção e conceitos de programação.', 'Criar uma trilha para inserção no mercado de trabalho.'],
+            'destaque': 'Sua doação equipa o laboratório e prepara jovens para o mercado.',
+        },
+        {
+            'nome': 'Artes Marciais',
+            'titulo': 'Disciplina e Autoconfiança',
+            'foto': 'projeto_artes_marciais.jpg',
+            'responsavel': 'Claudinei, Wesley e Rômulo',
+            'situacao': 'Em andamento',
+            'historico': 'Com professores voluntários e muitos sonhos, estamos prontos para iniciar um espaço onde disciplina, autocontrole e respeito moldam jovens todos os dias.',
+            'infraestrutura': ['Ampliação da área da cantina para as atividades de lutas', 'Climatização'],
+            'materiais': ['Tatames e colchonetes', 'Uniformes (kimonos para jiu-jitsu, uniformes para taekwondo e muay thai)', 'Equipamentos de proteção (capacetes, luvas, protetores bucais)'],
+            'objetivos': ['Criar turmas de Jiu-jitsu, Taekwondo e Muay Thai.', 'Oferecer duas aulas por semana.', 'Formar instrutores locais.'],
+            'destaque': '',
+        },
+        {
+            'nome': 'Curso de Elétrica',
+            'titulo': 'Formação Profissional',
+            'foto': 'projeto_eletrica.jpg',
+            'responsavel': 'Rouglan',
+            'situacao': 'Em breve',
+            'historico': 'Este curso nasceu quando um adolescente chorou dizendo que "não seria nada na vida". Decidimos provar o contrário.',
+            'infraestrutura': ['Sala para aulas práticas com bancadas de trabalho', 'Equipamento de segurança (extintores, sinalização de segurança)'],
+            'materiais': ['Ferramentas de elétrica (multímetros, chaves de fenda, alicates, etc.)', 'Materiais didáticos (livros, apostilas)', 'Equipamentos de segurança (luvas, óculos, botas)'],
+            'objetivos': ['Ensinar nossos jovens uma profissão que possibilite a inserção no mercado de trabalho.'],
+            'destaque': '',
+        },
+        {
+            'nome': 'Ballet na Igreja',
+            'titulo': 'Arte que Transforma',
+            'foto': 'projeto_ballet.jpg',
+            'responsavel': 'Arina Paiva',
+            'situacao': 'Em andamento',
+            'historico': 'O ballet já mudou a autoestima de muitas meninas da igreja e do bairro. Queremos ampliar — muito.',
+            'infraestrutura': ['Sala para aulas práticas com barras e espelhos de corpo inteiro', 'Armários, som e iluminação', 'Piso liso', 'Climatização'],
+            'materiais': ['Maiôs, collants, saias e meias-calças', 'Roupa para as aulas, como leotards, leggings e tops', 'Sapatilhas de ballet'],
+            'objetivos': ['Chegar a 50 alunas.', 'Criar turmas por nível.', 'Realizar espetáculos anuais no bairro.'],
+            'destaque': 'Com R$100 você veste uma bailarina pela primeira vez.',
+        },
+    ]
+    return render(request, 'projetos.html', {'projetos': lista})
+
+def doacao(request):
+    return render(request, 'doacao.html')
+
+def voluntario(request):
+    # por enquanto é so o front end, o formulario ainda nao salva nada
+    projetos = ['Futebol', 'Sopão Solidário', 'Curso de Informática', 'Curso de Elétrica',
+                'Artes Marciais (Jiu-jitsu, Taekwondo e Muay Thai)', 'Ballet na Igreja',
+                'Alfabetização e Reforço Escolar']
+    return render(request, 'voluntario.html', {'projetos': projetos})

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block conteudo %}
+
+<section class="faixa-azul">
+    <h1>SOBRE NÓS</h1>
+    <p>CONHEÇA O CAMINHO DA ESPERANÇA</p>
+</section>
+
+<!-- apresentacao -->
+<section class="pagina-secao duas-colunas">
+    <div>
+        <h2 class="titulo-secao">Apresentação</h2>
+        <p>O <strong>Caminho da Esperança</strong> nasce do compromisso da Primeira Igreja Batista em Retiro São Joaquim de levar luz onde faltam oportunidades.</p>
+        <p>No nosso bairro, centenas de crianças, adolescentes e jovens crescem sem acesso a esporte, arte, alimentação regular, formação profissional e espaços seguros.</p>
+        <p><strong>É aqui que você entra.</strong></p>
+        <p>Criamos este projeto para garantir:</p>
+        <ul class="lista-bolinha">
+            <li><strong>lazer e segurança</strong> para crianças que passavam tardes ociosas nas ruas;</li>
+            <li><strong>educação e formação profissional</strong> para jovens sem perspectivas;</li>
+            <li><strong>refeições</strong> quentes para famílias em vulnerabilidade;</li>
+            <li><strong>disciplina, dignidade e valores cristãos</strong> que moldam caráter e futuro.</li>
+        </ul>
+        <p class="versiculo">"Vocês são a luz do mundo." <span>(Mateus 5:14)</span></p>
+    </div>
+    <img src="{% static 'imagens/foto_grupo.png' %}" alt="Turma do projeto" class="foto-arredondada">
+</section>
+
+<!-- pesquisa no bairro -->
+<section class="fundo-claro">
+    <div class="pagina-secao">
+        <h2 class="titulo-secao">Quem você está ajudando a transformar</h2>
+        <p>Retiro São Joaquim e bairros vizinhos enfrentam desafios sociais profundos. Nossa pesquisa ouviu <strong>200 moradores</strong> — crianças, jovens, adultos e famílias — e o resultado foi claro:</p>
+
+        <div class="numeros">
+            <div class="numero">
+                <span>90%</span>
+                <p>disseram sentir falta de atividades e oportunidades no bairro</p>
+            </div>
+            <div class="numero">
+                <span>200</span>
+                <p>moradores ouvidos na pesquisa</p>
+            </div>
+            <div class="numero">
+                <span>65%</span>
+                <p>dos ouvidos têm entre 3 e 10 anos</p>
+            </div>
+        </div>
+
+        <div class="duas-colunas pesquisa">
+            <div>
+                <h3>Idade</h3>
+                <!-- barras feitas so com css, a largura é a porcentagem -->
+                <div class="barra"><span>3 a 5 anos</span><div style="width: 35%">35%</div></div>
+                <div class="barra"><span>6 a 10 anos</span><div style="width: 30%">30%</div></div>
+                <div class="barra"><span>0 a 2 anos</span><div style="width: 15%">15%</div></div>
+                <div class="barra"><span>11 a 15 anos</span><div style="width: 15%">15%</div></div>
+                <div class="barra"><span>16 a 18 anos</span><div style="width: 5%">5%</div></div>
+            </div>
+            <div>
+                <h3>Interesses</h3>
+                <div class="etiquetas">
+                    <span>Informática</span>
+                    <span>Elétrica</span>
+                    <span>Artes Marciais</span>
+                    <span>Futebol</span>
+                    <span>Vôlei</span>
+                    <span>Ballet</span>
+                    <span>Outros</span>
+                </div>
+                <p class="obs">A maior carência está em esporte, cursos profissionalizantes, alimentação e lazer seguro. A comunidade deseja um lugar onde suas crianças aprendam, cresçam e sejam cuidadas.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- equipe -->
+<section class="pagina-secao">
+    <h2 class="titulo-secao">Quem já está fazendo a diferença</h2>
+    <p>Aqui estão algumas das pessoas que dedicam tempo, conhecimento e amor para manter este sonho vivo.</p>
+
+    <div class="equipe">
+        {% for pessoa in equipe %}
+        <div class="pessoa">
+            <img src="{% static 'imagens/' %}{{ pessoa.foto }}" alt="{{ pessoa.nome }}">
+            <h3>{{ pessoa.nome }}</h3>
+            <p>{{ pessoa.funcao }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- testemunho -->
+<section class="fundo-claro">
+    <div class="pagina-secao">
+        <h2 class="titulo-secao">Testemunho de transformação</h2>
+        <p>O projeto de futebol acontece no bairro há mais de 20 anos, tendo início em nossa igreja com os diáconos Marcos e Guaracy, e continuou com apoios externos durante os anos. Atualmente se encontra parado e precisamos do seu apoio para retornarmos, para que mais testemunhos como o do Claudinei possam existir.</p>
+
+        <div class="testemunho">
+            <img src="{% static 'imagens/testemunho_claudinei.jpg' %}" alt="Claudinei" class="foto-testemunho">
+            <blockquote>
+                <p>"Meu nome é Claudinei, tenho 30 anos, sou servo do Senhor e sou nascido e criado em Retiro São Joaquim. Vivo aqui desde a minha infância e, graças a Deus, pude contar com a minha família e com o projeto da Primeira Igreja Batista do Retiro São Joaquim. Através deste projeto, vivi experiências que marcaram minha vida. Desde muito jovem, fui acolhido pelo Marcos e pelo Guaracy, que me ensinaram importantes valores como disciplina, respeito e o verdadeiro sentido de viver em comunidade. O esporte, além de me proporcionar momentos de lazer e desenvolvimento físico, foi uma grande escola de vida, onde aprendi a respeitar o próximo, a trabalhar em equipe e a valorizar a fé e os bons exemplos.</p>
+                <p>O projeto me ajudou a moldar minha trajetória de vida. Hoje, sou um homem casado, com uma família abençoada, e sou formado em Educação Física. Me empenho para transmitir os mesmos ensinamentos que recebi aos jovens da minha comunidade. Como professor, vejo a importância de continuar o trabalho que começou com o Marcos e o Guaracy. Quero ver as futuras gerações também se formando, se tornando pessoas de caráter e com dignidade."</p>
+                <cite>— Claudinei, professor de Educação Física</cite>
+            </blockquote>
+        </div>
+    </div>
+</section>
+
+<!-- chamada no final -->
+<section class="chamada">
+    <h2>Você não doa para um projeto. Você doa para uma vida.</h2>
+    <div class="chamada-botoes">
+        <a href="{% url 'doacao' %}" class="botao-amarelo">&#9825; Doe Agora</a>
+        <a href="{% url 'voluntario' %}" class="botao-borda">Seja um Voluntário</a>
+    </div>
+</section>
+
+{% endblock %}

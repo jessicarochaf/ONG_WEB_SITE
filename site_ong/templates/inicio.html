@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block conteudo %}
+
+<!-- titulo principal -->
+<section class="titulo-principal">
+    <h1>Transformando vidas<br>através da esperança</h1>
+</section>
+
+<!-- como voce pode ajudar -->
+<section class="ajudar">
+    <h2 class="titulo-linha">COMO VOCÊ PODE AJUDAR?</h2>
+
+    <div class="cartoes">
+        <div class="cartao">
+            <span class="cartao-icone">&#127919;</span>
+            <div>
+                <h3>NOSSA MISSÃO</h3>
+                <p>Promover acolhimento, apoio e esperança para pessoas que precisam.</p>
+            </div>
+        </div>
+        <div class="cartao">
+            <span class="cartao-icone">&#129309;</span>
+            <div>
+                <h3>SEJA UM VOLUNTÁRIO</h3>
+                <p>Faça parte das nossas ações e ajude a transformar vidas.</p>
+            </div>
+        </div>
+        <div class="cartao">
+            <span class="cartao-icone">&#128153;</span>
+            <div>
+                <h3>FAÇA UMA DOAÇÃO</h3>
+                <p>Sua contribuição ajuda a manter nossos projetos e ações sociais.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- projetos -->
+<section class="projetos">
+    <p class="subtitulo">NOSSOS</p>
+    <h2 class="titulo-grande">PROJETOS</h2>
+
+    <div class="lista-projetos">
+        <div class="projeto">
+            <img src="{% static 'imagens/icone_esporte.png' %}" alt="">
+            <h3>ESPORTE E LAZER</h3>
+            <p>Seu apoio garante aulas semanais que ensinam disciplina, respeito, trabalho em equipe e mantêm crianças longe do caminho das drogas e da violência.</p>
+        </div>
+        <div class="projeto">
+            <img src="{% static 'imagens/icone_alimentacao.png' %}" alt="">
+            <h3>ALIMENTAÇÃO (SOPÃO SOLIDÁRIO)</h3>
+            <p>Você assegura refeições quentes todas as semanas para famílias que enfrentam escassez alimentar.</p>
+        </div>
+        <div class="projeto">
+            <img src="{% static 'imagens/icone_formacao.png' %}" alt="">
+            <h3>Formação Profissional (Inglês, Informática e Elétrica)</h3>
+            <p>Abre portas para o mercado, devolvendo dignidade e esperança aos jovens.</p>
+        </div>
+        <div class="projeto">
+            <img src="{% static 'imagens/icone_artes_marciais.png' %}" alt="">
+            <h3>Disciplina e Autoconfiança (Artes Marciais)</h3>
+            <p>Com o seu apoio, o esporte se torna um espaço de força, respeito e proteção.</p>
+        </div>
+        <div class="projeto">
+            <img src="{% static 'imagens/icone_ballet.png' %}" alt="">
+            <h3>Arte que Transforma (Ballet)</h3>
+            <p>Você fortalece autoestima, beleza e sensibilidade através da dança.</p>
+        </div>
+    </div>
+    <a href="{% url 'projetos' %}" class="saiba-mais">Ver todos os projetos &rarr;</a>
+</section>
+
+<!-- sobre nos -->
+<section class="sobre">
+    <p class="subtitulo">SOBRE NÓS</p>
+    <h2 class="titulo-grande">CAMINHO DA ESPERANÇA</h2>
+
+    <div class="sobre-conteudo">
+        <div class="sobre-texto">
+            <h3>Mais do que um projeto, é um propósito!</h3>
+            <p>O Caminho da Esperança nasce do compromisso da Primeira Igreja Batista em Retiro São Joaquim de levar luz onde faltam oportunidades.</p>
+            <p>Somos um projeto social que busca transformar vidas por meio da educação, do esporte, da cultura, da alimentação e da formação profissional, oferecendo apoio a crianças, adolescentes, jovens e suas famílias.</p>
+            <p>Acreditamos que, com amor, respeito e oportunidades, é possível transformar realidades e construir um futuro melhor.</p>
+        </div>
+        <img src="{% static 'imagens/foto_grupo.png' %}" alt="Foto do grupo" class="sobre-foto">
+    </div>
+    <a href="{% url 'sobre' %}" class="saiba-mais">Conheça nossa história &rarr;</a>
+</section>
+
+{% endblock %}
