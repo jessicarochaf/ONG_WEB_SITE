@@ -12,7 +12,6 @@
 </head>
 <body>
 
-    <!-- menu de cima (aparece em todas as paginas) -->
     <header class="topo">
         <a href="{% url 'inicio' %}">
             <img src="{% static 'imagens/logo.png' %}" alt="Caminho da Esperança" class="logo">
@@ -30,7 +29,6 @@
         {% block conteudo %}{% endblock %}
     </main>
 
-    <!-- rodape -->
     <footer class="rodape">
         <div class="rodape-linha">
             <img src="{% static 'imagens/logo_rodape.png' %}" alt="Caminho da Esperança" class="logo-rodape">

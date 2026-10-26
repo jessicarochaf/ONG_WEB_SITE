@@ -11,7 +11,6 @@
 <section class="pagina-secao introducao">
     <p>Nosso objetivo é oferecer desenvolvimento integral para crianças, adolescentes e jovens do Retiro São Joaquim. Mas queremos que você veja de forma prática o impacto que sua contribuição gera.</p>
 
-    <!-- atalhos pra cada projeto -->
     <nav class="atalhos">
         {% for projeto in projetos %}
         <a href="#projeto-{{ forloop.counter }}">{{ projeto.nome }}</a>
@@ -66,7 +65,6 @@
 </section>
 {% endfor %}
 
-<!-- melhorias que o projeto precisa -->
 <section class="pagina-secao">
     <h2 class="titulo-secao">O que ainda precisamos</h2>
     <div class="necessidades">

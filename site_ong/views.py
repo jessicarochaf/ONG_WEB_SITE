@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-# cada funcao mostra uma pagina do site (os html ficam na pasta templates)
-# os textos foram tirados do PDF do projeto (Projeto Social - PIBRSJ)
+# os dados da equipe e dos projetos ficam em listas aqui e o html monta os cartoes com {% for %}.
+# assim, pra mudar um texto ou acrescentar um projeto, so mexe nessas listas e nao no html.
 
 def inicio(request):
     return render(request, 'inicio.html')
@@ -101,7 +101,7 @@ def doacao(request):
     return render(request, 'doacao.html')
 
 def voluntario(request):
-    # por enquanto é so o front end, o formulario ainda nao salva nada
+    # inclui Alfabetizacao e Reforco Escolar: tem responsavel (Pamela), mas ainda nao tem pagina em Projetos
     projetos = ['Futebol', 'Sopão Solidário', 'Curso de Informática', 'Curso de Elétrica',
                 'Artes Marciais (Jiu-jitsu, Taekwondo e Muay Thai)', 'Ballet na Igreja',
                 'Alfabetização e Reforço Escolar']

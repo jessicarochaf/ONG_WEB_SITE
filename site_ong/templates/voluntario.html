@@ -12,7 +12,7 @@
         </div>
     </section>
 
-    <!-- formulario (por enquanto so o visual, ainda nao salva) -->
+    <!-- formulario (o onsubmit impede a pagina de recarregar ao clicar em Enviar) -->
     <form class="formulario" onsubmit="return false">
 
         <div class="campo">
@@ -57,7 +57,7 @@
             <span class="icone">&#9719;</span>
             <label for="horas">Horas por semana:</label>
             <div class="horas">
-                <!-- os dois mexem juntos -->
+                <!-- o oninput de um atualiza o outro, assim a caixa e a barra mostram sempre o mesmo numero -->
                 <input type="number" id="horas" min="0" max="20" value="0"
                        oninput="barra_horas.value = this.value">
                 <input type="range" id="barra_horas" min="0" max="20" value="0"
