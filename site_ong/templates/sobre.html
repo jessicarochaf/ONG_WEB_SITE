@@ -104,12 +104,6 @@
     </div>
 </section>
 
-<section class="chamada">
-    <h2>Você não doa para um projeto. Você doa para uma vida.</h2>
-    <div class="chamada-botoes">
-        <a href="{% url 'doacao' %}" class="botao-amarelo">&#9825; Doe Agora</a>
-        <a href="{% url 'voluntario' %}" class="botao-borda">Seja um Voluntário</a>
-    </div>
-</section>
+{% include 'chamada.html' with frase='Você não doa para um projeto. Você doa para uma vida.' %}
 
 {% endblock %}

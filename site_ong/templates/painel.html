@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class="fundo-painel">
+
+    <section class="topo-painel">
+        <div>
+            <h1>Painel do Administrador</h1>
+            <p>Cadastros de voluntários recebidos pelo site</p>
+        </div>
+        <!-- o link de sair volta pro login; quando tiver backend, vira o logout do Django -->
+        <a href="{% url 'login_admin' %}" class="botao-sair">Sair</a>
+    </section>
+
+    <div class="resumo">
+        <div class="resumo-item">
+            <span>{{ cadastros|length }}</span>
+            <p>voluntários cadastrados</p>
+        </div>
+        <div class="resumo-item">
+            <span>{{ total_horas }}h</span>
+            <p>por semana, somando todos</p>
+        </div>
+        <div class="resumo-item">
+            <span>{{ por_periodo.Manhã }} / {{ por_periodo.Tarde }} / {{ por_periodo.Noite }}</span>
+            <p>manhã / tarde / noite</p>
+        </div>
+    </div>
+
+    <section class="caixa-tabela">
+        <div class="filtros">
+            <input type="text" id="busca" placeholder="Buscar por nome, telefone ou e-mail" oninput="filtrar()">
+            <select id="filtro-projeto" onchange="filtrar()">
+                <option value="">Todos os projetos</option>
+                {% for projeto in projetos %}
+                <option value="{{ projeto }}">{{ projeto }}</option>
+                {% endfor %}
+            </select>
+            <select id="filtro-periodo" onchange="filtrar()">
+                <option value="">Todos os períodos</option>
+                <option>Manhã</option>
+                <option>Tarde</option>
+                <option>Noite</option>
+            </select>
+        </div>
+
+        <!-- a div com overflow deixa a tabela rolar pro lado no celular em vez de quebrar a pagina -->
+        <div class="rolagem-tabela">
+            <table class="tabela">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>E-mail</th>
+                        <th>Disponibilidade</th>
+                        <th>Projetos</th>
+                        <th>Horas/semana</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in cadastros %}
+                    <!-- data-projetos e data-periodo guardam os valores que o filtro compara;
+                         o data-rotulo de cada celula vira o nome do campo no celular, quando a linha vira cartao -->
+                    <tr class="linha-cadastro" data-projetos="{{ c.projetos|join:'|' }}" data-periodo="{{ c.periodo }}">
+                        <td class="nome-cadastro" data-rotulo="Nome">{{ c.nome }}</td>
+                        <td data-rotulo="Telefone">{{ c.telefone }}</td>
+                        <td data-rotulo="E-mail">{{ c.email }}</td>
+                        <td data-rotulo="Disponibilidade"><span class="etiqueta-periodo">{{ c.periodo }}</span></td>
+                        <td class="coluna-projetos" data-rotulo="Projetos">
+                            {% for p in c.projetos %}
+                            <span class="etiqueta-projeto">{{ p }}</span>
+                            {% endfor %}
+                        </td>
+                        <td data-rotulo="Horas/semana">{{ c.horas }}h</td>
+                        <td data-rotulo="Data">{{ c.data }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="sem-cadastros">Nenhum cadastro ainda.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <p class="sem-resultado" id="sem-resultado">Nenhum cadastro encontrado com esses filtros.</p>
+    </section>
+</div>
+
+<script>
+    // esconde as linhas que nao combinam com a busca e os filtros (tudo no navegador, sem recarregar a pagina)
+    function filtrar() {
+        var busca = document.getElementById('busca').value.toLowerCase();
+        var projeto = document.getElementById('filtro-projeto').value;
+        var periodo = document.getElementById('filtro-periodo').value;
+        var linhas = document.querySelectorAll('.linha-cadastro');
+        var visiveis = 0;
+
+        for (var i = 0; i < linhas.length; i++) {
+            var linha = linhas[i];
+            var texto = linha.innerText.toLowerCase();
+            var projetosDaLinha = linha.dataset.projetos.split('|');
+
+            var passaBusca = texto.indexOf(busca) !== -1;
+            var passaProjeto = projeto === '' || projetosDaLinha.indexOf(projeto) !== -1;
+            var passaPeriodo = periodo === '' || linha.dataset.periodo === periodo;
+
+            if (passaBusca && passaProjeto && passaPeriodo) {
+                linha.style.display = '';
+                visiveis = visiveis + 1;
+            } else {
+                linha.style.display = 'none';
+            }
+        }
+
+        document.getElementById('sem-resultado').style.display = visiveis === 0 ? 'block' : 'none';
+    }
+</script>
+
+{% endblock %}

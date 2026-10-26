@@ -79,12 +79,6 @@
     </div>
 </section>
 
-<section class="chamada">
-    <h2>Impacto não é o que fazemos. Impacto é o que VOCÊ possibilita.</h2>
-    <div class="chamada-botoes">
-        <a href="{% url 'doacao' %}" class="botao-amarelo">&#9825; Doe Agora</a>
-        <a href="{% url 'voluntario' %}" class="botao-borda">Seja um Voluntário</a>
-    </div>
-</section>
+{% include 'chamada.html' with frase='Impacto não é o que fazemos. Impacto é o que VOCÊ possibilita.' %}
 
 {% endblock %}

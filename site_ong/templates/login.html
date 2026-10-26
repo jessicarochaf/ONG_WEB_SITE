@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class="fundo-login">
+    <div class="caixa-login">
+
+        <div class="topo-login">
+            <span class="cadeado">&#128274;</span>
+            <h1>Área do Administrador</h1>
+            <p>Acesso restrito à equipe do Caminho da Esperança</p>
+        </div>
+
+        <!-- method post + csrf_token: o Django so aceita login enviado desse jeito -->
+        <form method="post" class="formulario-login">
+            {% csrf_token %}
+
+            {% if form.errors or erro %}
+            <p class="erro-login">Usuário ou senha incorretos. Tente de novo.</p>
+            {% endif %}
+
+            <label for="usuario">Usuário</label>
+            <div class="campo-login">
+                <span class="icone">&#128100;</span>
+                <input type="text" id="usuario" name="username" placeholder="Digite seu usuário" autocomplete="username" required>
+            </div>
+
+            <label for="senha">Senha</label>
+            <div class="campo-login">
+                <span class="icone">&#128273;</span>
+                <input type="password" id="senha" name="password" placeholder="Digite sua senha" autocomplete="current-password" required>
+            </div>
+
+            <input type="hidden" name="next" value="{{ next }}">
+
+            <button type="submit" class="botao-enviar">Entrar</button>
+        </form>
+
+        <a href="{% url 'inicio' %}" class="voltar-site">&larr; Voltar para o site</a>
+    </div>
+</div>
+
+{% endblock %}

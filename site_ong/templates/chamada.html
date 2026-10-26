@@ -1,0 +1,8 @@
+{# faixa do final das paginas Sobre e Projetos; cada pagina inclui esse arquivo mandando a sua propria frase #}
+<section class="chamada">
+    <h2>{{ frase }}</h2>
+    <div class="chamada-botoes">
+        <a href="{% url 'doacao' %}" class="botao-amarelo">&#9825; Doe Agora</a>
+        <a href="{% url 'voluntario' %}" class="botao-borda">Seja um Voluntário</a>
+    </div>
+</section>

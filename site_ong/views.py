@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.conf import settings
+from django.shortcuts import render, redirect
 
 # os dados da equipe e dos projetos ficam em listas aqui e o html monta os cartoes com {% for %}.
 # assim, pra mudar um texto ou acrescentar um projeto, so mexe nessas listas e nao no html.
@@ -100,9 +101,55 @@ def projetos(request):
 def doacao(request):
     return render(request, 'doacao.html')
 
+# projetos que o voluntario pode escolher no formulario. o painel usa a mesma lista no filtro,
+# entao se um projeto entrar ou sair, muda so aqui.
+# inclui Alfabetizacao e Reforco Escolar: tem responsavel (Pamela), mas ainda nao tem pagina em Projetos
+PROJETOS_VOLUNTARIO = ['Futebol', 'Sopão Solidário', 'Curso de Informática', 'Curso de Elétrica',
+                       'Artes Marciais (Jiu-jitsu, Taekwondo e Muay Thai)', 'Ballet na Igreja',
+                       'Alfabetização e Reforço Escolar']
+
 def voluntario(request):
-    # inclui Alfabetizacao e Reforco Escolar: tem responsavel (Pamela), mas ainda nao tem pagina em Projetos
-    projetos = ['Futebol', 'Sopão Solidário', 'Curso de Informática', 'Curso de Elétrica',
-                'Artes Marciais (Jiu-jitsu, Taekwondo e Muay Thai)', 'Ballet na Igreja',
-                'Alfabetização e Reforço Escolar']
-    return render(request, 'voluntario.html', {'projetos': projetos})
+    return render(request, 'voluntario.html', {'projetos': PROJETOS_VOLUNTARIO})
+
+def login_admin(request):
+    # login TEMPORARIO pra testar a tela enquanto nao tem banco: usuario admin, senha admin.
+    # so funciona com DEBUG = True (no computador de quem esta desenvolvendo), entao nao vale no site publicado.
+    # quem fizer o backend troca essa funcao pelo LoginView do Django; o html ja usa os nomes que ele espera
+    # (username, password, form.errors e next)
+    erro = False
+    if request.method == 'POST':
+        usuario = request.POST.get('username', '')
+        senha = request.POST.get('password', '')
+        if settings.DEBUG and usuario == 'admin' and senha == 'admin':
+            return redirect('painel_admin')
+        erro = True
+    return render(request, 'login.html', {'erro': erro})
+
+def painel_admin(request):
+    # dados de exemplo so pra montar a tela, ainda nao tem banco.
+    # o backend troca essa lista pelos cadastros reais, com os mesmos nomes de campo do formulario de voluntario
+    cadastros = [
+        {'nome': 'Voluntário Exemplo 1', 'telefone': '(21) 90000-0001', 'email': 'exemplo1@email.com',
+         'periodo': 'Manhã', 'projetos': ['Futebol', 'Sopão Solidário'], 'horas': 4, 'data': '20/10/2026'},
+        {'nome': 'Voluntário Exemplo 2', 'telefone': '(21) 90000-0002', 'email': 'exemplo2@email.com',
+         'periodo': 'Noite', 'projetos': ['Curso de Informática'], 'horas': 6, 'data': '21/10/2026'},
+        {'nome': 'Voluntário Exemplo 3', 'telefone': '(21) 90000-0003', 'email': 'exemplo3@email.com',
+         'periodo': 'Tarde', 'projetos': ['Ballet na Igreja', 'Alfabetização e Reforço Escolar'], 'horas': 3, 'data': '22/10/2026'},
+        {'nome': 'Voluntário Exemplo 4', 'telefone': '(21) 90000-0004', 'email': 'exemplo4@email.com',
+         'periodo': 'Manhã', 'projetos': ['Artes Marciais (Jiu-jitsu, Taekwondo e Muay Thai)'], 'horas': 8, 'data': '24/10/2026'},
+        {'nome': 'Voluntário Exemplo 5', 'telefone': '(21) 90000-0005', 'email': 'exemplo5@email.com',
+         'periodo': 'Tarde', 'projetos': ['Curso de Elétrica', 'Futebol'], 'horas': 2, 'data': '25/10/2026'},
+    ]
+
+    total_horas = 0
+    por_periodo = {'Manhã': 0, 'Tarde': 0, 'Noite': 0}
+    for c in cadastros:
+        total_horas = total_horas + c['horas']
+        por_periodo[c['periodo']] = por_periodo[c['periodo']] + 1
+
+    return render(request, 'painel.html', {
+        'cadastros': cadastros,
+        'total_horas': total_horas,
+        'por_periodo': por_periodo,
+        'projetos': PROJETOS_VOLUNTARIO,
+    })
