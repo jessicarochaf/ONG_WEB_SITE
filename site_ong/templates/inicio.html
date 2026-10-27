@@ -3,30 +3,30 @@
 
 {% block conteudo %}
 
-<section class="titulo-principal">
-    <h1>Transformando vidas<br>através da esperança</h1>
+<section class="faixa-azul titulo-principal">
+    <h1>Transformando vidas através da esperança</h1>
 </section>
 
-<section class="ajudar">
+<section>
     <h2 class="titulo-linha">COMO VOCÊ PODE AJUDAR?</h2>
 
     <div class="cartoes">
         <div class="cartao">
-            <span class="cartao-icone">&#127919;</span>
+            <img src="{% static 'imagens/icone_missao.jpg' %}" alt="" class="cartao-icone">
             <div>
                 <h3>NOSSA MISSÃO</h3>
                 <p>Promover acolhimento, apoio e esperança para pessoas que precisam.</p>
             </div>
         </div>
         <div class="cartao">
-            <span class="cartao-icone">&#129309;</span>
+            <img src="{% static 'imagens/icone_voluntario.jpg' %}" alt="" class="cartao-icone">
             <div>
                 <h3>SEJA UM VOLUNTÁRIO</h3>
                 <p>Faça parte das nossas ações e ajude a transformar vidas.</p>
             </div>
         </div>
         <div class="cartao">
-            <span class="cartao-icone">&#128153;</span>
+            <img src="{% static 'imagens/icone_doacao.jpg' %}" alt="" class="cartao-icone">
             <div>
                 <h3>FAÇA UMA DOAÇÃO</h3>
                 <p>Sua contribuição ajuda a manter nossos projetos e ações sociais.</p>
@@ -80,7 +80,7 @@
             <p>Somos um projeto social que busca transformar vidas por meio da educação, do esporte, da cultura, da alimentação e da formação profissional, oferecendo apoio a crianças, adolescentes, jovens e suas famílias.</p>
             <p>Acreditamos que, com amor, respeito e oportunidades, é possível transformar realidades e construir um futuro melhor.</p>
         </div>
-        <img src="{% static 'imagens/foto_grupo.png' %}" alt="Foto do grupo" class="sobre-foto">
+        <img src="{% static 'imagens/foto_grupo.jpg' %}" alt="Foto do grupo" class="sobre-foto">
     </div>
     <a href="{% url 'sobre' %}" class="saiba-mais">Conheça nossa história &rarr;</a>
 </section>

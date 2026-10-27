@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.conf import settings
 from django.shortcuts import render, redirect
 
@@ -108,6 +110,11 @@ PROJETOS_VOLUNTARIO = ['Futebol', 'Sopão Solidário', 'Curso de Informática', 
                        'Artes Marciais (Jiu-jitsu, Taekwondo e Muay Thai)', 'Ballet na Igreja',
                        'Alfabetização e Reforço Escolar']
 
+# situacao de cada cadastro no painel:
+# Pendente = ninguem analisou ainda | Ativo = aceito e ajudando
+# Inativo = era ativo e parou | Recusado = analisado e nao aceito
+STATUS_VOLUNTARIO = ['Pendente', 'Ativo', 'Inativo', 'Recusado']
+
 def voluntario(request):
     return render(request, 'voluntario.html', {'projetos': PROJETOS_VOLUNTARIO})
 
@@ -127,29 +134,33 @@ def login_admin(request):
 
 def painel_admin(request):
     # dados de exemplo so pra montar a tela, ainda nao tem banco.
+    # a data e um date (nao texto) pra dar pra ordenar por mais recente, igual vai ser com o banco
     # o backend troca essa lista pelos cadastros reais, com os mesmos nomes de campo do formulario de voluntario
     cadastros = [
         {'nome': 'Voluntário Exemplo 1', 'telefone': '(21) 90000-0001', 'email': 'exemplo1@email.com',
-         'periodo': 'Manhã', 'projetos': ['Futebol', 'Sopão Solidário'], 'horas': 4, 'data': '20/10/2026'},
+         'periodo': 'Manhã', 'projetos': ['Futebol', 'Sopão Solidário'], 'horas': 4, 'data': date(2026, 10, 20), 'status': 'Ativo'},
         {'nome': 'Voluntário Exemplo 2', 'telefone': '(21) 90000-0002', 'email': 'exemplo2@email.com',
-         'periodo': 'Noite', 'projetos': ['Curso de Informática'], 'horas': 6, 'data': '21/10/2026'},
+         'periodo': 'Noite', 'projetos': ['Curso de Informática'], 'horas': 6, 'data': date(2026, 10, 21), 'status': 'Pendente'},
         {'nome': 'Voluntário Exemplo 3', 'telefone': '(21) 90000-0003', 'email': 'exemplo3@email.com',
-         'periodo': 'Tarde', 'projetos': ['Ballet na Igreja', 'Alfabetização e Reforço Escolar'], 'horas': 3, 'data': '22/10/2026'},
+         'periodo': 'Tarde', 'projetos': ['Ballet na Igreja', 'Alfabetização e Reforço Escolar'], 'horas': 3, 'data': date(2026, 10, 22), 'status': 'Recusado'},
         {'nome': 'Voluntário Exemplo 4', 'telefone': '(21) 90000-0004', 'email': 'exemplo4@email.com',
-         'periodo': 'Manhã', 'projetos': ['Artes Marciais (Jiu-jitsu, Taekwondo e Muay Thai)'], 'horas': 8, 'data': '24/10/2026'},
+         'periodo': 'Manhã', 'projetos': ['Artes Marciais (Jiu-jitsu, Taekwondo e Muay Thai)'], 'horas': 8, 'data': date(2026, 10, 24), 'status': 'Inativo'},
         {'nome': 'Voluntário Exemplo 5', 'telefone': '(21) 90000-0005', 'email': 'exemplo5@email.com',
-         'periodo': 'Tarde', 'projetos': ['Curso de Elétrica', 'Futebol'], 'horas': 2, 'data': '25/10/2026'},
+         'periodo': 'Tarde', 'projetos': ['Curso de Elétrica', 'Futebol'], 'horas': 2, 'data': date(2026, 10, 25), 'status': 'Pendente'},
     ]
 
-    total_horas = 0
-    por_periodo = {'Manhã': 0, 'Tarde': 0, 'Noite': 0}
+    # o resumo conta os periodos so de quem esta Ativo (quem esta de fato ajudando)
+    ativos_por_periodo = {'Manhã': 0, 'Tarde': 0, 'Noite': 0}
+    por_status = {'Pendente': 0, 'Ativo': 0, 'Inativo': 0, 'Recusado': 0}
     for c in cadastros:
-        total_horas = total_horas + c['horas']
-        por_periodo[c['periodo']] = por_periodo[c['periodo']] + 1
+        por_status[c['status']] = por_status[c['status']] + 1
+        if c['status'] == 'Ativo':
+            ativos_por_periodo[c['periodo']] = ativos_por_periodo[c['periodo']] + 1
 
     return render(request, 'painel.html', {
         'cadastros': cadastros,
-        'total_horas': total_horas,
-        'por_periodo': por_periodo,
+        'ativos_por_periodo': ativos_por_periodo,
+        'por_status': por_status,
+        'lista_status': STATUS_VOLUNTARIO,
         'projetos': PROJETOS_VOLUNTARIO,
     })

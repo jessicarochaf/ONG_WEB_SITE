@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{# na area do admin fica so o logo em cima: sem o menu e sem o rodape do site #}
+{% block menu %}{% endblock %}
+{% block rodape %}{% endblock %}
+
 {% block conteudo %}
 
 <div class="fundo-painel">
@@ -15,16 +19,16 @@
 
     <div class="resumo">
         <div class="resumo-item">
-            <span>{{ cadastros|length }}</span>
-            <p>voluntários cadastrados</p>
+            <span id="total-ativos">{{ por_status.Ativo }}</span>
+            <p>voluntários ativos</p>
         </div>
         <div class="resumo-item">
-            <span>{{ total_horas }}h</span>
-            <p>por semana, somando todos</p>
+            <span id="total-pendentes">{{ por_status.Pendente }}</span>
+            <p>pendentes de análise</p>
         </div>
         <div class="resumo-item">
-            <span>{{ por_periodo.Manhã }} / {{ por_periodo.Tarde }} / {{ por_periodo.Noite }}</span>
-            <p>manhã / tarde / noite</p>
+            <span id="ativos-periodo">{{ ativos_por_periodo.Manhã }} / {{ ativos_por_periodo.Tarde }} / {{ ativos_por_periodo.Noite }}</span>
+            <p>ativos de manhã / tarde / noite</p>
         </div>
     </div>
 
@@ -37,11 +41,23 @@
                 <option value="{{ projeto }}">{{ projeto }}</option>
                 {% endfor %}
             </select>
+            <select id="filtro-status" onchange="filtrar()">
+                <option value="">Todos os status</option>
+                {% for s in lista_status %}
+                <option>{{ s }}</option>
+                {% endfor %}
+            </select>
             <select id="filtro-periodo" onchange="filtrar()">
                 <option value="">Todos os períodos</option>
                 <option>Manhã</option>
                 <option>Tarde</option>
                 <option>Noite</option>
+            </select>
+            <select id="ordenar" onchange="ordenar()" aria-label="Ordenar cadastros">
+                <option value="recentes">Mais recentes</option>
+                <option value="antigos">Mais antigos</option>
+                <option value="az">Nome (A-Z)</option>
+                <option value="za">Nome (Z-A)</option>
             </select>
         </div>
 
@@ -51,9 +67,10 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
+                        <th>Status</th>
                         <th>Telefone</th>
                         <th>E-mail</th>
-                        <th>Disponibilidade</th>
+                        <th>Período</th>
                         <th>Projetos</th>
                         <th>Horas/semana</th>
                         <th>Data</th>
@@ -61,24 +78,34 @@
                 </thead>
                 <tbody>
                     {% for c in cadastros %}
-                    <!-- data-projetos e data-periodo guardam os valores que o filtro compara;
+                    <!-- os data-... guardam os valores que o filtro e a ordenacao comparam (a data vai como ano-mes-dia pra ordenar certo);
                          o data-rotulo de cada celula vira o nome do campo no celular, quando a linha vira cartao -->
-                    <tr class="linha-cadastro" data-projetos="{{ c.projetos|join:'|' }}" data-periodo="{{ c.periodo }}">
+                    <tr class="linha-cadastro" data-projetos="{{ c.projetos|join:'|' }}" data-periodo="{{ c.periodo }}" data-status="{{ c.status }}" data-data="{{ c.data|date:'Y-m-d' }}" data-nome="{{ c.nome|lower }}"
+                        data-busca="{{ c.nome|lower }} {{ c.telefone }} {{ c.email|lower }}">
                         <td class="nome-cadastro" data-rotulo="Nome">{{ c.nome }}</td>
+                        <!-- o admin troca o status por aqui; a classe status-pendente, status-ativo... da a cor de cada um.
+                             por enquanto so muda na tela: o backend precisa salvar a escolha no banco -->
+                        <td data-rotulo="Status">
+                            <select class="seletor-status status-{{ c.status|lower }}" onchange="mudarStatus(this)" aria-label="Status de {{ c.nome }}">
+                                {% for s in lista_status %}
+                                <option {% if s == c.status %}selected{% endif %}>{{ s }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
                         <td data-rotulo="Telefone">{{ c.telefone }}</td>
                         <td data-rotulo="E-mail">{{ c.email }}</td>
-                        <td data-rotulo="Disponibilidade"><span class="etiqueta-periodo">{{ c.periodo }}</span></td>
+                        <td data-rotulo="Período"><span class="etiqueta-periodo">{{ c.periodo }}</span></td>
                         <td class="coluna-projetos" data-rotulo="Projetos">
                             {% for p in c.projetos %}
                             <span class="etiqueta-projeto">{{ p }}</span>
                             {% endfor %}
                         </td>
                         <td data-rotulo="Horas/semana">{{ c.horas }}h</td>
-                        <td data-rotulo="Data">{{ c.data }}</td>
+                        <td data-rotulo="Data">{{ c.data|date:'d/m/Y' }}</td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="7" class="sem-cadastros">Nenhum cadastro ainda.</td>
+                        <td colspan="8" class="sem-cadastros">Nenhum cadastro ainda.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -95,19 +122,21 @@
         var busca = document.getElementById('busca').value.toLowerCase();
         var projeto = document.getElementById('filtro-projeto').value;
         var periodo = document.getElementById('filtro-periodo').value;
+        var status = document.getElementById('filtro-status').value;
         var linhas = document.querySelectorAll('.linha-cadastro');
         var visiveis = 0;
 
         for (var i = 0; i < linhas.length; i++) {
             var linha = linhas[i];
-            var texto = linha.innerText.toLowerCase();
+            var texto = linha.dataset.busca;
             var projetosDaLinha = linha.dataset.projetos.split('|');
 
             var passaBusca = texto.indexOf(busca) !== -1;
             var passaProjeto = projeto === '' || projetosDaLinha.indexOf(projeto) !== -1;
             var passaPeriodo = periodo === '' || linha.dataset.periodo === periodo;
+            var passaStatus = status === '' || linha.dataset.status === status;
 
-            if (passaBusca && passaProjeto && passaPeriodo) {
+            if (passaBusca && passaProjeto && passaPeriodo && passaStatus) {
                 linha.style.display = '';
                 visiveis = visiveis + 1;
             } else {
@@ -116,6 +145,61 @@
         }
 
         document.getElementById('sem-resultado').style.display = visiveis === 0 ? 'block' : 'none';
+    }
+
+    // muda a ordem das linhas da tabela conforme a opcao escolhida em "Ordenar"
+    function ordenar() {
+        var opcao = document.getElementById('ordenar').value;
+        var corpo = document.querySelector('.tabela tbody');
+        var linhas = Array.from(document.querySelectorAll('.linha-cadastro'));
+
+        linhas.sort(function (a, b) {
+            if (opcao === 'recentes') return b.dataset.data.localeCompare(a.dataset.data);
+            if (opcao === 'antigos') return a.dataset.data.localeCompare(b.dataset.data);
+            if (opcao === 'az') return a.dataset.nome.localeCompare(b.dataset.nome, 'pt-BR');
+            return b.dataset.nome.localeCompare(a.dataset.nome, 'pt-BR');
+        });
+
+        // appendChild move a linha pro final, entao no fim elas ficam na ordem da lista
+        for (var i = 0; i < linhas.length; i++) {
+            corpo.appendChild(linhas[i]);
+        }
+    }
+
+    // a tabela ja abre com os mais recentes em cima
+    ordenar();
+
+    // quando o admin escolhe outro status: troca a cor, avisa o filtro e reconta os pendentes
+    function mudarStatus(seletor) {
+        var novo = seletor.value;
+        seletor.className = 'seletor-status status-' + novo.toLowerCase();
+        seletor.closest('tr').dataset.status = novo;
+
+        atualizarResumo();
+        filtrar();
+    }
+
+    // reconta os numeros do resumo a partir dos status que estao na tabela agora
+    function atualizarResumo() {
+        var linhas = document.querySelectorAll('.linha-cadastro');
+        var ativos = 0;
+        var pendentes = 0;
+        var periodos = { 'Manhã': 0, 'Tarde': 0, 'Noite': 0 };
+
+        for (var i = 0; i < linhas.length; i++) {
+            var status = linhas[i].dataset.status;
+            if (status === 'Pendente') {
+                pendentes = pendentes + 1;
+            }
+            if (status === 'Ativo') {
+                ativos = ativos + 1;
+                periodos[linhas[i].dataset.periodo] = periodos[linhas[i].dataset.periodo] + 1;
+            }
+        }
+
+        document.getElementById('total-ativos').textContent = ativos;
+        document.getElementById('total-pendentes').textContent = pendentes;
+        document.getElementById('ativos-periodo').textContent = periodos['Manhã'] + ' / ' + periodos['Tarde'] + ' / ' + periodos['Noite'];
     }
 </script>
 
