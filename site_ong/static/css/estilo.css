@@ -108,11 +108,7 @@ a {
     line-height: 1.1;
 }
 
-/* ---------- pagina inicial ---------- */
-
-/* a frase da pagina inicial usa a mesma faixa azul das outras paginas (faixa-azul).
-   como ela nao tem a frase branca pequena embaixo, o espaco de cima e de baixo e um pouco maior
-   (35px em vez de 25px) pra faixa ficar da mesma altura das outras */
+/* -- pagina inicial -- */
 .faixa-azul.titulo-principal {
     padding: 35px 16px;
     margin-bottom: 70px;
@@ -131,7 +127,7 @@ a {
     max-width: 240px;
 }
 
-/* tamanho fixo pros 3 icones ficarem iguais, mesmo com desenhos de proporcao diferente */
+
 .cartao-icone {
     width: 52px;
     height: 52px;
@@ -215,7 +211,7 @@ a {
     margin-top: 40px;
 }
 
-/* ---------- pagina de doacao ---------- */
+/* --- pagina de doacao -- */
 
 .faixa-azul {
     background: var(--azul);
@@ -306,7 +302,7 @@ a {
     height: 1px;
 }
 
-/* ---------- pagina de voluntario ---------- */
+/* -- pagina de voluntario -- */
 
 .fundo-voluntario {
     background: var(--fundo-claro);
@@ -480,7 +476,7 @@ a {
     padding: 10px 0;
 }
 
-/* ---------- paginas Sobre e Projetos ---------- */
+/* -- paginas Sobre e Projetos -- */
 
 .pagina-secao {
     max-width: 1100px;
@@ -581,7 +577,7 @@ a {
     margin-bottom: 12px;
 }
 
-/* barrinha horizontal: o texto do lado e a barra azul com a % */
+
 .barra {
     display: flex;
     align-items: center;
